@@ -4,6 +4,7 @@ from urllib.request import urlopen
 from selenium import webdriver
 import time
 import functools
+from pomegranate import *
 
 dna = ['A','T','C','G']
 
@@ -205,3 +206,4 @@ b0c = b0_c/sum0
 b0g = b0_g/sum0
 
 print("emission :   ",'1a:',b1a,'1t:',b1t,'1c:', b1c,'1g:', b1g,'0a:', b0a,'0t:', b0t,'0c:', b0c,'0g:', b0g)
+model = HiddenMarkovModel()
