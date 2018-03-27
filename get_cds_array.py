@@ -180,7 +180,7 @@ def calculate_emission_probability(label_array, emission_array):
     return b1_a, b1_t, b1_c, b1_g, b0_a, b0_t, b0_c, b0_g
 
 
-label_array, emission_array = write_label_file('CP001942.1.fasta', 'cds_number.txt', 'new.txt', 'cp001942')
+label_array, emission_array = write_label_file('complete_NC_000852.5.fasta', 'CDS_NC_000852.5.txt', 'new.txt', 'NC_000852')
 a1_0, a0_1, a1_1, a0_0 = calculate_transition_probability(label_array)
 b1_a, b1_t, b1_c, b1_g, b0_a, b0_t, b0_c, b0_g = calculate_emission_probability(label_array, emission_array)
 
