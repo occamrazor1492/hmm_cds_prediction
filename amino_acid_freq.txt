@@ -1,0 +1,30 @@
+my_own_cds.txt  :  Counter({'T': 90935, 'A': 90520, 'C': 62838, 'G': 61979})
+temp.txt  :  Counter({'A': 99288, 'T': 99189, 'C': 66566, 'G': 65568})
+C :
+whole length:  66566
+CDS  62838
+rate 0.20517056733883607
+NON CDS:  3728
+rate 0.15316980977032746
+----
+T :
+whole length:  99189
+CDS  90935
+rate 0.29690928325148885
+NON CDS:  8254
+rate 0.33912650478655654
+----
+A :
+whole length:  99288
+CDS  90520
+rate 0.29555427854978583
+NON CDS:  8768
+rate 0.36024487448128517
+----
+G :
+whole length:  65568
+CDS  61979
+rate 0.20236587085988925
+NON CDS:  3589
+rate 0.1474588109618308
+----

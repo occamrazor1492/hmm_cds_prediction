@@ -65,6 +65,7 @@ def in_range(item, list):
         # print("yes")
         return True
     else:
+        # print("No")
         return False
 
 # test
@@ -75,6 +76,7 @@ def write_label_file(fasta_file, cds_file, label_file, genbank_id):
     try:
         os.remove("temp.txt")
         os.remove("label_array.txt")
+        os.remove('my_own_cds.txt')
     except:
         pass
     # label array
@@ -86,6 +88,11 @@ def write_label_file(fasta_file, cds_file, label_file, genbank_id):
     # print("sequence length: ", sequence_lenght)
     # get cds zon [[],[],[]]
     cds_range = get_cds_range(cds_file)
+
+    # my own CDS file
+    ownCDS = []
+
+
     # delete first line
     with open(fasta_file, 'r') as fin:
         data = fin.read().splitlines(True)
@@ -103,6 +110,7 @@ def write_label_file(fasta_file, cds_file, label_file, genbank_id):
                 for a_range in cds_range:
                     if(in_range(word_count,a_range)):
                         label_array.append(1)
+                        ownCDS.append(c)
                         flag=True
                         break
                 if(not flag):
@@ -113,6 +121,13 @@ def write_label_file(fasta_file, cds_file, label_file, genbank_id):
 
     print ("total char count is : ", word_count)
     str1 = ''.join(str(e) for e in label_array)
+
+    # write to myOwn cds file
+    str2 = ''.join(str(cds) for cds in ownCDS)
+    cds_file = open('my_own_cds.txt', 'w')
+    cds_file.write(str2)
+    cds_file.close()
+
     text_file = open("label_array.txt", "w")
     text_file.write(str1)
     text_file.close()
@@ -180,13 +195,15 @@ def calculate_emission_probability(label_array, emission_array):
     return b1_a, b1_t, b1_c, b1_g, b0_a, b0_t, b0_c, b0_g
 
 
-label_array, emission_array = write_label_file('complete_NC_000852.5.fasta', 'CDS_NC_000852.5.txt', 'new.txt', 'NC_000852')
+label_array, emission_array = write_label_file('complete_NC_000852.5.fasta', 'cds_number.txt', 'new.txt', 'NC_000852')
 a1_0, a0_1, a1_1, a0_0 = calculate_transition_probability(label_array)
 b1_a, b1_t, b1_c, b1_g, b0_a, b0_t, b0_c, b0_g = calculate_emission_probability(label_array, emission_array)
 
 # state transition
 a01 = a0_1/(a0_0 + a0_1)
 a10 = a1_0/(a1_0 + a1_1)
+a11 = a1_1/(a1_0 + a1_1)
+a00 = a0_0/(a0_0 + a0_1)
 
 print('a01:',a01, 'a10', a10)
 
@@ -206,4 +223,4 @@ b0c = b0_c/sum0
 b0g = b0_g/sum0
 
 print("emission :   ",'1a:',b1a,'1t:',b1t,'1c:', b1c,'1g:', b1g,'0a:', b0a,'0t:', b0t,'0c:', b0c,'0g:', b0g)
-model = HiddenMarkovModel()
+# model = HiddenMarkovModel()
